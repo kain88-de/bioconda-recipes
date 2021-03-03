@@ -1,0 +1,29 @@
+{% set version="2.0.2" %}
+
+package:
+  name: dsh-bio
+  version: {{ version }}
+
+source:
+  url: https://search.maven.org/remotecontent?filepath=org/dishevelled/dsh-bio-tools/{{ version }}/dsh-bio-tools-{{ version }}-bin.tar.gz
+  sha256: eada488d7aa863ce187473512f85be9a0ce6a0b50a6ecf66c23c0ee72908747e
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  run:
+    - openjdk >=8
+    - zlib
+
+test:
+  commands:
+    - dsh-bio --help
+    - dsh-split-bed --help
+
+about:
+  home: https://github.com/heuermh/dishevelled-bio
+  license: LGPL version 3 or later
+  license_file: COPYING.LESSER
+  summary: Tools for BED, FASTA, FASTQ, GAF, GFA1/2, GFF3, PAF, SAM, and VCF files

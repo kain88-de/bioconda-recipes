@@ -1,74 +1,57 @@
 package:
   name: gseapy
-  version: "0.7.3"
+  version: "0.10.3"
 
 source:
-  fn: gseapy-0.7.3.tar.gz
-  url: https://pypi.python.org/packages/2b/dd/99517c4785978681c25f25844be872377d9c844c0cdcb2232fb64ec5b263/gseapy-0.7.3.tar.gz
-  md5: e28d43ace32e52639ae7f6a99e65fcc3
-#  patches:
-   # List any patch files here
-   # - fix.patch
+  url: https://files.pythonhosted.org/packages/72/91/663e3ca6105c90f7b85fedd6f856b19c03f01727d16f489f7b0ee601ff2d/gseapy-0.10.3.tar.gz
+  sha256: 8f128a27cf4a4916ca15f58953f754325954372c39f51fec98f0ba101a4bf580
 
 build:
-  # noarch_python: True
-  # preserve_egg_dir: True
+  noarch: python
   entry_points:
-    # Put any entry points (scripts to be generated automatically) here. The
-    # syntax is module:function.  For example
-    #
-    # - gseapy = gseapy:main
-    #
-    # Would create an entry point called gseapy that calls gseapy.main()
-
     - gseapy = gseapy.__main__:main
-
-  # If this is a new build for the same version, increment the build
-  # number. If you do not include this key, it defaults to 0.
-  # number: 1
+  number: 0
 
 requirements:
-  build:
-    - python
+  host:
+    - python >3
     - setuptools
-    - numpy >=1.8.0
+    - numpy >=1.13.0
+    - scipy
     - pandas >=0.16
-    - matplotlib >=1.4.3
+    - matplotlib-base >=1.4.3
     - beautifulsoup4 >=4.4.1
     - requests
-
+    - lxml
+    - html5lib
+    - bioservices
+    - joblib
   run:
-    - python
-    - numpy >=1.8.0
+    - python >3
+    - numpy >=1.13.0
+    - scipy
     - pandas >=0.16
-    - matplotlib >=1.4.3
+    - matplotlib-base >=1.4.3
     - beautifulsoup4 >=4.4.1
     - requests
+    - lxml
+    - html5lib
+    - bioservices
+    - joblib
 
 test:
-  # Python imports
   imports:
     - gseapy
-
   commands:
-    # You can put test commands to be run here.  Use this to test that the
-    # entry points work.
-
     - gseapy --help
 
-  # You can also put a file called run_test.py in the recipe that will be run
-  # at test time.
-
-  # requires:
-    # Put any additional test requirements here.  For example
-    # - nose
-
 about:
-  home: https://github.com/BioNinja/gseapy
+  home: https://github.com/zqfang/gseapy
   license: MIT License
   summary: 'Gene Set Enrichment Analysis in Python'
   license_family: MIT
 
-# See
-# http://docs.continuum.io/conda/build.html for
-# more information about meta.yaml
+extra:
+  container:
+    # matplotlib needs opengl support
+    extended-base: true

@@ -1,0 +1,37 @@
+{% set version = "2.52" %}
+{% set sha256 = "c58a7e787f622ece189a4eb7f19637ffbda26c434fc6ea7b6fa0e7f460db9822" %}
+
+package:
+  name: hmftools-purple
+  version: '{{ version }}'
+
+source:
+  url: https://github.com/hartwigmedical/hmftools/releases/download/purple-v{{ version }}/purple-{{ version }}.jar
+  sha256: '{{ sha256 }}'
+
+build:
+  noarch: generic
+  number: 0
+
+requirements:
+  run:
+    - zlib
+    - openjdk >=8
+    - xorg-libxtst
+    - circos >=0.69.6
+    - bioconductor-variantannotation
+    - r-cairo
+    - r-cowplot
+    - r-dplyr
+    - r-ggplot2
+    - r-tidyr
+
+test:
+  commands:
+    - 'PURPLE -version'
+
+about:
+  home: https://github.com/hartwigmedical/hmftools/tree/master/purity-ploidy-estimator
+  license: MIT
+  license_family: MIT
+  summary: Purity/ploidy estimator. Leverages the read depth and tumor BAF to estimate the purity of a sample and generate a copy number profile

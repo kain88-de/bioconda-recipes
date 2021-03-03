@@ -1,0 +1,27 @@
+{% set version="0.11.1" %}
+
+package:
+  name: cannoli
+  version: {{ version }}
+
+source:
+  url: https://search.maven.org/remotecontent?filepath=org/bdgenomics/cannoli/cannoli-distribution-spark3_2.12/{{ version }}/cannoli-distribution-spark3_2.12-{{ version }}-bin.tar.gz
+  sha256: a41f6ad894964698e28e9e22dfdfea84ef2a13dabeb38101092265d4b3ba0017
+
+build:
+  number: 0
+  noarch: generic
+
+requirements:
+  run:
+    - openjdk >=8
+    - pyspark
+
+test:
+  commands:
+    - cannoli-submit --help
+
+about:
+  home: https://github.com/bigdatagenomics/cannoli
+  license: Apache 2
+  summary: Distributed execution of bioinformatics tools on Apache Spark

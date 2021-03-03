@@ -1,0 +1,33 @@
+{% set version="1.73" %}
+
+package:
+  name: sdm 
+  version: {{ version }}
+
+source:
+  url: https://github.com/hildebra/sdm/archive/{{ version }}.tar.gz
+  sha256: 3ea5e45db673ffd4632a5186f2c4f7b86eacc4eabcd44e5dd4b95f16b2508f5d
+  patches:
+    - macOS_1.73.patch
+
+build:
+  number: 1
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+  host:
+    - zlib
+  run:
+    - zlib
+
+test:
+  commands:
+    - sdm 
+
+about:
+  home: https://github.com/hildebra/sdm/
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: 'sdm - simple demultiplex tool for FASTQ demultiplexing and dereplication'

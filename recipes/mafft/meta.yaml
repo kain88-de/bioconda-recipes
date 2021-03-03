@@ -1,23 +1,32 @@
-about:
-    home: 'http://mafft.cbrc.jp/alignment/software/'
-    license: BSD
-    summary: Multiple alignment program for amino acid or nucleotide sequences based on fast Fourier transform
+{% set name = "mafft" %}
+{% set version = "7.475" %}
 
 package:
-  name: mafft
-  version: '7.221'
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://mafft.cbrc.jp/alignment/software/mafft-{{ version }}-without-extensions-src.tgz
+  sha256: "d908dd15b89b41fe0f6d2fa0b181b760e8a9b5eb1091d9e69a5d40ba46155144"
 
 build:
   number: 0
-  skip: False
 
-source:
-  fn: mafft-7.221-without-extensions-src.tgz
-  md5: 6b05a64d2ccfce1fd203a6a52776d401
-  url: http://mafft.cbrc.jp/alignment/software/mafft-7.221-without-extensions-src.tgz
-  patches:
-    - osx-makefile.patch # [osx]
-    - linux-makefile.patch # [linux]
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('go-cgo') }}
+
 test:
-    commands:
-        - mafft --version
+  commands:
+    - mafft --version
+
+about:
+  home: 'http://mafft.cbrc.jp/alignment/software/'
+  license: BSD
+  summary: Multiple alignment program for amino acid or nucleotide sequences based on fast Fourier transform
+
+extra:
+  identifiers:
+    - doi:10.1093/nar/gkf436
+    - usegalaxy-eu:rbc_mafft

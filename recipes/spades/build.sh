@@ -1,8 +1,9 @@
 #!/bin/bash
-outdir=$PREFIX/share/$PKG_NAME-$PKG_VERSION-$PKG_BUILDNUM
-mkdir -p $outdir
-mkdir -p $PREFIX/bin
 
-cp -r bin $outdir
-cp -r share $outdir
-ln -s $outdir/bin/* $PREFIX/bin
+set -e -o pipefail -x
+
+export LIBRARY_PATH=${PREFIX}/lib
+export C_INCLUDE_PATH=${PREFIX}/include
+export CPP_INCLUDE_PATH=${PREFIX}/include
+
+bash spades_compile.sh -rj8
